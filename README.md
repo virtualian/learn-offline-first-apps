@@ -20,7 +20,7 @@ This project is configured for the following Claude Code integrations. The `.mcp
 
 | Tool | What it does | How to enable |
 |---|---|---|
-| **Supabase MCP** | Query logs, run advisors, execute SQL, manage your project from Claude Code | Enable the `supabase` plugin in Claude Code settings |
+| **Supabase MCP** | Query logs, run advisors, execute SQL, manage your project, and search Supabase docs — all from Claude Code | Enable the `supabase` plugin in Claude Code settings |
 | **Supabase Postgres Best Practices skill** | Postgres query and schema optimisation guidance | Enable the `postgres-best-practices` skill in Claude Code settings |
 | **PowerSync Docs MCP** | Search PowerSync documentation from Claude Code | Configured in `.mcp.json` — loads automatically |
 | **PowerSync skill** | Guided onboarding and best practices for PowerSync integration | Install via Claude Code skill manager |
