@@ -2,7 +2,7 @@
 
 ## What We Built
 
-`realtime-sync-demo.html` extends the online-first demo with one critical addition: a **Supabase Realtime subscription**. Open the file in two tabs side by side and type a note in one — it appears in the other instantly, with no refresh.
+`online-sync-demo.html` extends the online-first demo with one critical addition: a **Supabase Realtime subscription**. Open the file in two tabs side by side and type a note in one — it appears in the other instantly, with no refresh.
 
 The file structure is the same as `online-first-demo.html`, with two changes:
 
