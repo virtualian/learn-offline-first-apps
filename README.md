@@ -6,7 +6,8 @@ A learning project exploring offline-first data access and synchronisation using
 
 | File | What it is |
 |---|---|
-| `online-first-demo.html` | A plain HTML page that reads and writes directly to Supabase — no framework, no build step |
+| `online-first-demo.html` | Reads and writes directly to Supabase — no framework, no build step |
+| `online-sync-demo.html` | Adds Supabase Realtime — multiple tabs/browsers see changes instantly via WebSocket |
 | `docs/` | Explanation guides documenting the concepts behind each step |
 
 ---
@@ -25,9 +26,18 @@ create table notes (
 );
 ```
 
-### 2. Configure the demo
+### 2. Enable Realtime for the table
 
-Open `online-first-demo.html` and replace the two constants at the top of the script:
+Add the `notes` table to the Supabase Realtime publication (required for `online-sync-demo.html`):
+
+```bash
+supabase link --project-ref <your-project-ref>
+supabase db query "alter publication supabase_realtime add table public.notes;" --linked
+```
+
+### 3. Configure the demos
+
+Open `online-first-demo.html` and `online-sync-demo.html` and replace the two constants at the top of each script:
 
 ```js
 const SUPABASE_URL = 'https://your-project.supabase.co'
@@ -36,15 +46,16 @@ const SUPABASE_ANON_KEY = 'your-anon-key'
 
 Your project URL and anon key are in your Supabase dashboard under **Project Settings → API**.
 
-### 3. Run the demo
+### 4. Run the demos
 
 ```bash
 python3 -m http.server 8081
 ```
 
-Open `http://localhost:8081/online-first-demo.html`.
+- `http://localhost:8081/online-first-demo.html` — basic read/write
+- `http://localhost:8081/online-sync-demo.html` — open in two tabs to see live sync
 
-### 4. Run the docs
+### 5. Run the docs
 
 ```bash
 python3 -m http.server 8080 --directory docs
@@ -79,5 +90,5 @@ The `.mcp.json` and `.claude/settings.json` files are checked in — Claude Code
 
 ## Stack
 
-- **Supabase** — cloud Postgres database and REST API
+- **Supabase** — cloud Postgres database, REST API, and Realtime (WebSocket change streaming)
 - **PowerSync** — offline sync layer (coming)
