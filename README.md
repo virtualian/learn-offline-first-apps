@@ -14,6 +14,17 @@ A learning project exploring offline-first data access and synchronisation using
 
 The demo HTML file (`online-first-demo.html`) has a Supabase URL and anon key hardcoded at the top. Replace these with your own project's values before running.
 
+### Claude Code AI Tools
+
+This project is configured for the following Claude Code integrations. The `.mcp.json` and `.claude/settings.json` files are checked in — Claude Code picks them up automatically when you open the project.
+
+| Tool | What it does | How to enable |
+|---|---|---|
+| **Supabase MCP** | Query logs, run advisors, execute SQL, manage your project from Claude Code | Enable the `supabase` plugin in Claude Code settings |
+| **Supabase Postgres Best Practices skill** | Postgres query and schema optimisation guidance | Enable the `postgres-best-practices` skill in Claude Code settings |
+| **PowerSync Docs MCP** | Search PowerSync documentation from Claude Code | Configured in `.mcp.json` — loads automatically |
+| **PowerSync skill** | Guided onboarding and best practices for PowerSync integration | Install via Claude Code skill manager |
+
 ---
 
 ## What's Here
