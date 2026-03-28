@@ -216,6 +216,78 @@ What's still missing:
 - The client-side connector that authenticates with PowerSync Cloud and uploads local writes to Supabase (Step 3)
 - The demo wired up to actually sync (Step 4)
 
+## Step 3: The connector
+
+### What the connector does
+
+The connector is a class with two methods that PowerSync calls automatically:
+
+- **`fetchCredentials()`** — returns the PowerSync Cloud URL and an authentication token. The SDK calls this every few minutes to keep the connection alive. In our demo, it returns the dev token from the `.env` file. In a real app, it would call Supabase Auth to get a fresh JWT for the current user.
+
+- **`uploadData(database)`** — sends locally-written rows to Supabase. Whenever you insert, update, or delete a note locally, PowerSync queues that change. The SDK calls `uploadData` to process the queue. Inside, it:
+  1. Gets the next transaction from the queue (`getNextCrudTransaction`)
+  2. Iterates each operation in the transaction
+  3. Maps each operation type to a Supabase call:
+     - **PUT** → `supabase.from('notes').upsert(record)` (insert or replace)
+     - **PATCH** → `supabase.from('notes').update(fields).eq('id', id)` (update specific fields)
+     - **DELETE** → `supabase.from('notes').delete().eq('id', id)`
+  4. Marks the transaction as complete, removing it from the upload queue
+
+If an upload fails with a transient error (network timeout), PowerSync retries automatically. If it fails permanently (constraint violation), the connector discards the transaction so it doesn't block the queue.
+
+### Wiring it up
+
+After initializing the database, one line connects everything:
+
+```js
+const connector = new SupabaseConnector()
+db.connect(connector)
+```
+
+From this point, two things happen in parallel:
+- **Download path** — PowerSync Cloud pushes data from Supabase (via WAL) into the local SQLite
+- **Upload path** — the connector sends local writes to Supabase via the upload queue
+
+### Reactive UI with db.watch()
+
+In Step 1, we called `loadNotes()` manually after every insert. With sync, notes can arrive from other clients at any time — we can't predict when to reload.
+
+`db.watch()` solves this. It returns an async iterable that emits new query results whenever the underlying table changes — whether from a local write or a sync from PowerSync Cloud:
+
+```js
+for await (const result of db.watch('SELECT * FROM notes ORDER BY created_at DESC')) {
+  renderNotes(result)
+}
+```
+
+This replaces the manual reload pattern entirely. The UI updates automatically, whether you added a note or another device did.
+
+### The sync badge
+
+The UI now shows a status badge (like the "Live" badge in the online-sync demo):
+- **Synced** (green) — connected to PowerSync Cloud, sync is active
+- **Connecting…** (red) — establishing connection
+- **Offline** (red) — no connection, working from local data only
+
+This uses the `registerListener` API on the database:
+
+```js
+db.registerListener({
+  statusChanged: (status) => {
+    // status.connected, status.connecting, status.uploading, status.downloading
+  }
+})
+```
+
+### What this step accomplished
+
+The demo is now fully functional offline-first:
+- Notes are stored locally in SQLite (instant reads and writes)
+- Changes sync bidirectionally with Supabase via PowerSync Cloud
+- The UI updates reactively when sync delivers new data
+- A badge shows the current sync status
+- Everything works offline — sync resumes when connectivity returns
+
 ## Architecture comparison
 
 ```mermaid

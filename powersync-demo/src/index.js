@@ -1,14 +1,12 @@
 import { PowerSyncDatabase, createBaseLogger } from '@powersync/web'
 import { AppSchema } from './schema.js'
+import { SupabaseConnector } from './connector.js'
 
 // Enable SDK logging — outputs sync activity, connection status, and errors
 // to the browser console. Open DevTools → Console to see it.
 createBaseLogger().useDefaults()
 
 // ─── Database Setup ─────────────────────────────────────────────────────────
-// PowerSyncDatabase opens a local SQLite database backed by WASM.
-// All reads and writes happen locally — no network required.
-// Later, we'll add a connector to sync with Supabase via PowerSync Cloud.
 let db
 
 async function openDatabase() {
@@ -20,14 +18,28 @@ async function openDatabase() {
   await db.init()
   console.log('PowerSync database initialized')
 
-  await loadNotes()
+  // Connect to PowerSync Cloud for sync
+  const connector = new SupabaseConnector()
+  db.connect(connector)
+
+  // Watch for sync status changes (connected, uploading, downloading)
+  db.registerListener({
+    statusChanged: (status) => {
+      updateSyncBadge(status)
+    }
+  })
+
+  // Watch the notes query — emits initial results immediately, then re-emits
+  // whenever the table changes (local write or sync from PowerSync Cloud)
+  watchNotes()
 }
 
-// ─── Read ────────────────────────────────────────────────────────────────────
-async function loadNotes() {
-  const notes = await db.getAll('SELECT * FROM notes ORDER BY created_at DESC')
-  renderNotes(notes)
-  setStatus(`${notes.length} note${notes.length !== 1 ? 's' : ''} in local database.`)
+// ─── Watch ───────────────────────────────────────────────────────────────────
+async function watchNotes() {
+  for await (const result of db.watch('SELECT * FROM notes ORDER BY created_at DESC')) {
+    const notes = Array.isArray(result) ? result : (result.rows?._array ?? [])
+    updateNotesList(notes)
+  }
 }
 
 // ─── Write ───────────────────────────────────────────────────────────────────
@@ -42,10 +54,29 @@ async function addNote() {
   )
 
   input.value = ''
-  await loadNotes()
+}
+
+// ─── Sync Badge ──────────────────────────────────────────────────────────────
+function updateSyncBadge(status) {
+  const badge = document.getElementById('sync-badge')
+  badge.classList.remove('connected')
+
+  if (status.connected) {
+    badge.textContent = 'Synced'
+    badge.classList.add('connected')
+  } else if (status.connecting) {
+    badge.textContent = 'Connecting…'
+  } else {
+    badge.textContent = 'Offline'
+  }
 }
 
 // ─── Helpers ─────────────────────────────────────────────────────────────────
+function updateNotesList(notes) {
+  renderNotes(notes)
+  setStatus(`${notes.length} note${notes.length !== 1 ? 's' : ''} in local database.`)
+}
+
 function renderNotes(notes) {
   const list = document.getElementById('notesList')
   list.innerHTML = notes.map(note => `
@@ -65,7 +96,6 @@ function escapeHtml(str) {
 }
 
 // ─── Event Wiring ────────────────────────────────────────────────────────────
-// Expose addNote to the onclick handler in index.html
 window.addNote = addNote
 
 document.addEventListener('DOMContentLoaded', () => {
