@@ -60,6 +60,26 @@ This mirrors the `notes` table in Supabase, with two differences:
 
 2. **Everything is `text`, `integer`, or `real`** — PowerSync's local SQLite uses these three column types. Timestamps like `created_at` are stored as `text` (ISO 8601 strings), not a native date type.
 
+## Keeping schemas in sync
+
+There are three schema definitions in this architecture, and they are **not automatically synchronized**:
+
+| Schema | Where it lives | What it defines |
+|--------|---------------|-----------------|
+| Supabase Postgres | SQL migrations | The source-of-truth table structure (`CREATE TABLE notes ...`) |
+| Sync Streams | PowerSync Dashboard (YAML) | Which columns and rows to replicate (`SELECT * FROM notes`) |
+| Client SQLite | `schema.js` in your app code | The local table structure PowerSync creates in the browser |
+
+If you change the Supabase table — say, adding an `updated_at` column — you need to update all three:
+
+1. **Supabase** — add the column via a migration
+2. **Sync Streams** — if your query uses `SELECT *`, it picks up the new column automatically. If you list columns explicitly, add the new one.
+3. **Client schema** — add `updated_at: column.text` to the `notes` Table definition in `schema.js`. Without this, the local SQLite table won't have the column, and synced data for that field will be silently dropped.
+
+Missing step 3 is a common gotcha — Supabase has the column, Sync Streams replicate it, but the client never sees the data because the local schema doesn't declare it.
+
+**Shortcut:** The PowerSync Dashboard has a **Client SDK Setup** page that generates the client schema from your deployed Sync Streams config. Click **Client SDK Setup** in the sidebar → select your language → copy the generated schema. This is a one-time generation tool, not a live sync — you still need to update it manually when the schema changes.
+
 ## What this step accomplished
 
 After this step, the demo app can:
