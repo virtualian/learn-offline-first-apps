@@ -13,8 +13,13 @@
     button:hover { background: #2db87a; }
     ul { list-style: none; padding: 0; margin: 0; }
     li { padding: 10px 14px; border: 1px solid #eee; border-radius: 6px; margin-bottom: 8px; }
-    li .meta { font-size: 0.75rem; color: #aaa; margin-top: 4px; }
-    #status { font-size: 0.85rem; color: #888; margin-top: 16px; }
+    .note-row { display: flex; justify-content: space-between; align-items: center; }
+    .delete-btn { padding: 2px 8px; background: transparent; color: #ccc; font-size: 1.1rem; border: none; cursor: pointer; }
+    .delete-btn:hover { color: #e11d48; background: transparent; }
+    li .meta { font-size: 0.75rem; color: #aaa; margin-top: 4px; display: flex; justify-content: space-between; }
+    .sync-ok { color: #15803d; }
+    .sync-pending { color: #b91c1c; }
+    #sync-info { font-size: 0.8rem; color: #888; margin-bottom: 8px; display: flex; justify-content: space-between; }
     .sync-badge {
       display: inline-block;
       font-size: 0.75rem;
@@ -45,13 +50,17 @@
     Works offline — try disconnecting your network.
   </p>
 
+  <div id="sync-info">
+    <span id="status"></span>
+    <span id="last-sync">Never synced</span>
+  </div>
+
   <div class="add-row">
     <input id="noteInput" type="text" placeholder="Write a note…" />
     <button onclick="addNote()">Add</button>
   </div>
 
   <ul id="notesList"></ul>
-  <div id="status"></div>
 
 </body>
 </html>
