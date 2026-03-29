@@ -1,6 +1,10 @@
-# offline-first
+# Learn how offline-first applications work
 
-A learning project exploring offline-first data access and synchronisation using Supabase and PowerSync. Built in small steps, starting from the simplest possible online-first baseline and progressively adding offline capabilities.
+> A learning project exploring offline-first data access and synchronisation using [Supabase](https://supabase.com/docs) and [PowerSync](https://docs.powersync.com/).
+
+Built in small steps, starting from the simplest possible online-first baseline and progressively adding offline capabilities.
+
+**Questions or feedback?** Join the [discussions](https://github.com/virtualian/offline-first/discussions).
 
 ## What's Here
 
@@ -15,7 +19,22 @@ A learning project exploring offline-first data access and synchronisation using
 
 ## Getting Started
 
-### 1. Create the Supabase table
+### 1. Clone the repo
+
+```bash
+git clone https://github.com/virtualian/offline-first.git
+cd offline-first
+```
+
+### 2. Run the docs
+
+```bash
+python3 -m http.server 8080 --directory docs
+```
+
+Open `http://localhost:8080` — the docs explain the concepts behind each step.
+
+### 3. Create the Supabase table
 
 In your Supabase project, open the SQL Editor and run:
 
@@ -27,7 +46,7 @@ create table notes (
 );
 ```
 
-### 2. Enable Realtime for the table
+### 4. Enable Realtime for the table
 
 Add the `notes` table to the Supabase Realtime publication (required for `online-sync-demo.html`):
 
@@ -36,7 +55,7 @@ supabase link --project-ref <your-project-ref>
 supabase db query "alter publication supabase_realtime add table public.notes;" --linked
 ```
 
-### 3. Configure the demos
+### 5. Configure the demos
 
 Open `online-first-demo.html` and `online-sync-demo.html` and replace the two constants at the top of each script:
 
@@ -47,7 +66,7 @@ const SUPABASE_ANON_KEY = 'your-anon-key'
 
 Your project URL and anon key are in your Supabase dashboard under **Project Settings → API**.
 
-### 4. Run the online demos
+### 6. Run the online demos
 
 ```bash
 python3 -m http.server 8081
@@ -56,7 +75,7 @@ python3 -m http.server 8081
 - `http://localhost:8081/online-first-demo.html` — basic read/write
 - `http://localhost:8081/online-sync-demo.html` — open in two tabs to see live sync
 
-### 5. Run the PowerSync demo
+### 7. Run the PowerSync demo
 
 ```bash
 cd powersync-demo
@@ -72,14 +91,6 @@ Open `http://localhost:5173` — add notes and watch the sync badge.
 **Testing multi-client sync:** Open a second browser window (or use the [PowerSync Diagnostics App](https://diagnostics-app.powersync.com)) to see changes appear across clients. Each browser instance has its own local SQLite — PowerSync keeps them in sync via the cloud.
 
 **Note on conflicts:** Each note gets a unique UUID, so two clients adding the same text creates two separate rows — not a conflict. This demo only supports insert and delete. Row updates and conflict reconciliation will be covered in the next version.
-
-### 6. Run the docs
-
-```bash
-python3 -m http.server 8080 --directory docs
-```
-
-Open `http://localhost:8080`.
 
 ---
 
@@ -111,3 +122,9 @@ The `.mcp.json` and `.claude/settings.json` files are checked in — Claude Code
 - **Supabase** — cloud Postgres database, REST API, and Realtime (WebSocket change streaming)
 - **PowerSync** — offline-first sync layer with local SQLite and bidirectional Supabase sync
 - **Vite** — build tool for the PowerSync demo (required for WASM + web workers)
+
+---
+
+## Discussions
+
+Questions, ideas, or feedback? Join the [discussions](https://github.com/virtualian/offline-first/discussions).
