@@ -65,7 +65,11 @@ npm install
 npm run dev
 ```
 
-Open `http://localhost:5173` — add notes, toggle your network off/on, and watch the sync badge.
+Open `http://localhost:5173` — add notes and watch the sync badge.
+
+**Testing offline:** Turn off Wi-Fi, add a note — it saves locally and shows "Not sync'd" in red. Turn Wi-Fi back on and watch it sync automatically.
+
+**Testing multi-client sync:** Open a second browser window (or use the [PowerSync Diagnostics App](https://diagnostics-app.powersync.com)) to see changes appear across clients. Each browser instance has its own local SQLite — PowerSync keeps them in sync via the cloud.
 
 ### 6. Run the docs
 
