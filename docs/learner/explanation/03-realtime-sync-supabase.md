@@ -1,17 +1,15 @@
 # Realtime Sync — How Multiple Instances Stay in Step
 
-## What We Built
+> To set up and test the online sync demo, see [How to Set Up and Test the Online Sync Demo](../how-to/03-setup-online-sync-demo.md).
 
-`online-sync-demo.html` extends the online-first demo with one critical addition: a **Supabase Realtime subscription**. Open the file in two tabs side by side and type a note in one — it appears in the other instantly, with no refresh.
+## What Changed from the Online-First Demo
 
-The file structure is the same as `online-first-demo.html`, with two changes:
+`online-sync-demo.html` extends the online-first demo with one critical addition: a **Supabase Realtime subscription**. Two changes make this work:
 
 1. `addNote()` no longer calls `loadNotes()` after writing. The subscription handles the update instead.
 2. A new `subscribeToNotes()` function opens a persistent WebSocket connection and listens for both INSERT and DELETE events on the `notes` table.
 
 Everything else — the Supabase client, the initial load, the rendering — is unchanged.
-
-Deletes are intentionally not available through the app's UI. Instead, delete a row via the Supabase dashboard — every open instance removes it from its list immediately.
 
 ---
 
@@ -84,36 +82,13 @@ This means realtime updates are **not a polling mechanism** — they are a conse
 
 ---
 
-## Enabling Realtime for a Table
+## The Publication Requirement
 
 Supabase does not stream changes from all tables by default. Each table must be explicitly added to a Postgres **publication** called `supabase_realtime`. Without this step, the client subscription connects successfully and reports `SUBSCRIBED` — but events never arrive. No error, no warning, just silence.
 
-The setup is a single SQL statement:
-
-```sql
-alter publication supabase_realtime add table public.notes;
-```
-
-You can run this via the Supabase CLI:
-
-```bash
-supabase link --project-ref <your-project-ref>
-supabase db query "alter publication supabase_realtime add table public.notes;" --linked
-```
-
-Or via the Supabase MCP `execute_sql` tool if you're using an AI agent.
-
-To verify the table is in the publication:
-
-```sql
-select * from pg_publication_tables where pubname = 'supabase_realtime';
-```
-
-### Why this step is easy to miss
-
 The `postgres_changes` feature is built on Postgres's **logical replication** infrastructure. A publication is a Postgres concept that defines which tables' WAL entries are made available to downstream consumers. Supabase Realtime is one such consumer — it reads the `supabase_realtime` publication to know which changes to stream.
 
-The term "publication" comes from Postgres, not Supabase. In the Supabase dashboard, you'll find this setting under **Database → Publications** — not under the Realtime section, because it's a database-level configuration.
+The term "publication" comes from Postgres, not Supabase. In the Supabase dashboard, you'll find this setting under **Database > Publications** — not under the Realtime section, because it's a database-level configuration. For the steps to enable this, see the [setup guide](../how-to/03-setup-online-sync-demo.md).
 
 ### Where things live in the dashboard
 
@@ -121,9 +96,9 @@ The Supabase dashboard splits Realtime configuration across three locations, bec
 
 | Location | What it does |
 |---|---|
-| **Database → Publications** | Controls which tables are in the `supabase_realtime` publication. This is the Postgres layer — it determines what data enters the WAL stream. |
-| **Realtime → Settings** | Controls the Realtime WebSocket service itself — enable/disable, connection limits, max events per second. |
-| **Realtime → Inspector** | A live debugging tool. You manually type a channel name, click "Start listening", and watch events flow. It does not auto-discover channels — channels are ephemeral and only exist while clients are subscribed. |
+| **Database > Publications** | Controls which tables are in the `supabase_realtime` publication. This is the Postgres layer — it determines what data enters the WAL stream. |
+| **Realtime > Settings** | Controls the Realtime WebSocket service itself — enable/disable, connection limits, max events per second. |
+| **Realtime > Inspector** | A live debugging tool. You manually type a channel name, click "Start listening", and watch events flow. It does not auto-discover channels — channels are ephemeral and only exist while clients are subscribed. |
 
 The Inspector is useful for verifying that events are actually flowing after you've configured a publication. But it's a debugging tool, not a configuration surface.
 

@@ -1,22 +1,22 @@
 # Why Online-First Works — and Why It's Not Enough
 
+> To set up and run this demo yourself, see [How to Set Up and Test the Online-First Demo](../how-to/02-setup-online-first-demo.md).
+
 ## What We Built
 
-`online-first-demo.html` is the starting point for this learning exercise. It is a single self-contained HTML file — no framework, no build step, no server. Open it in a browser and it reads and writes rows in a real Postgres database running in the cloud.
+`online-first-demo.html` is a single self-contained HTML file — no framework, no build step, no server. It reads and writes rows in a real Postgres database running in the cloud.
 
 The file is structured in four sections:
 
-**1. Configuration** — two constants at the top of the script: the Supabase project URL and a publishable API key. These tell the Supabase client where to connect.
+**1. Configuration** — two constants identify the Supabase project: a URL and a publishable API key.
 
 **2. Client** — `supabase.createClient(URL, KEY)` creates the client object. Everything else goes through this object.
 
-**3. Read — `loadNotes()`** — calls `.from('notes').select('*').order('created_at', { ascending: false })` to fetch all rows from the `notes` table, newest first. The result is an array of JSON objects. It renders them into a `<ul>` list with the note content and timestamp.
+**3. Read — `loadNotes()`** — calls `.from('notes').select('*').order('created_at', { ascending: false })` to fetch all rows from the `notes` table, newest first. The result is an array of JSON objects rendered into a list with the note content and timestamp.
 
 **4. Write — `addNote()`** — reads the text input, calls `.from('notes').insert({ content })` to write a new row, then calls `loadNotes()` again to refresh the list.
 
-The Supabase client is loaded via CDN (`cdn.jsdelivr.net`) — no npm install, no bundler. This is the simplest possible way to use it.
-
-This is the **online-first** model — the simplest possible architecture for data access.
+The Supabase client is loaded via CDN — no npm install, no bundler. This is the **online-first** model — the simplest possible architecture for data access.
 
 ---
 

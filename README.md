@@ -8,6 +8,7 @@ A learning project exploring offline-first data access and synchronisation using
 |---|---|
 | `online-first-demo.html` | Reads and writes directly to Supabase — no framework, no build step |
 | `online-sync-demo.html` | Adds Supabase Realtime — multiple tabs/browsers see changes instantly via WebSocket |
+| `powersync-demo/` | Offline-first demo using PowerSync — local SQLite with bidirectional Supabase sync |
 | `docs/` | Explanation guides documenting the concepts behind each step |
 
 ---
@@ -46,7 +47,7 @@ const SUPABASE_ANON_KEY = 'your-anon-key'
 
 Your project URL and anon key are in your Supabase dashboard under **Project Settings → API**.
 
-### 4. Run the demos
+### 4. Run the online demos
 
 ```bash
 python3 -m http.server 8081
@@ -55,7 +56,24 @@ python3 -m http.server 8081
 - `http://localhost:8081/online-first-demo.html` — basic read/write
 - `http://localhost:8081/online-sync-demo.html` — open in two tabs to see live sync
 
-### 5. Run the docs
+### 5. Run the PowerSync demo
+
+```bash
+cd powersync-demo
+cp .env.example .env   # fill in your PowerSync and Supabase credentials
+npm install
+npm run dev
+```
+
+Open `http://localhost:5173` — add notes and watch the sync badge.
+
+**Testing offline:** Turn off Wi-Fi, add a note — it saves locally and shows "Not sync'd" in red. Turn Wi-Fi back on and watch it sync automatically.
+
+**Testing multi-client sync:** Open a second browser window (or use the [PowerSync Diagnostics App](https://diagnostics-app.powersync.com)) to see changes appear across clients. Each browser instance has its own local SQLite — PowerSync keeps them in sync via the cloud.
+
+**Note on conflicts:** Each note gets a unique UUID, so two clients adding the same text creates two separate rows — not a conflict. This demo only supports insert and delete. Row updates and conflict reconciliation will be covered in the next version.
+
+### 6. Run the docs
 
 ```bash
 python3 -m http.server 8080 --directory docs
@@ -91,4 +109,5 @@ The `.mcp.json` and `.claude/settings.json` files are checked in — Claude Code
 ## Stack
 
 - **Supabase** — cloud Postgres database, REST API, and Realtime (WebSocket change streaming)
-- **PowerSync** — offline sync layer (coming)
+- **PowerSync** — offline-first sync layer with local SQLite and bidirectional Supabase sync
+- **Vite** — build tool for the PowerSync demo (required for WASM + web workers)

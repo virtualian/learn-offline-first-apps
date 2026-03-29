@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>PowerSync Offline-First Notes Demo</title>
+  <style>
+    body { font-family: sans-serif; max-width: 600px; margin: 60px auto; padding: 0 20px; }
+    h1 { font-size: 1.4rem; margin-bottom: 4px; }
+    p.subtitle { color: #666; font-size: 0.9rem; margin-top: 0; margin-bottom: 24px; }
+    .add-row { display: flex; gap: 8px; margin-bottom: 24px; }
+    input { flex: 1; padding: 8px 12px; border: 1px solid #ccc; border-radius: 6px; font-size: 1rem; }
+    button { padding: 8px 16px; background: #3ecf8e; color: #fff; border: none; border-radius: 6px; cursor: pointer; font-size: 1rem; }
+    button:hover { background: #2db87a; }
+    ul { list-style: none; padding: 0; margin: 0; }
+    li { padding: 10px 14px; border: 1px solid #eee; border-radius: 6px; margin-bottom: 8px; }
+    .note-row { display: flex; justify-content: space-between; align-items: center; }
+    .delete-btn { padding: 2px 8px; background: transparent; color: #ccc; font-size: 1.1rem; border: none; cursor: pointer; }
+    .delete-btn:hover { color: #e11d48; background: transparent; }
+    li .meta { font-size: 0.75rem; color: #aaa; margin-top: 4px; display: flex; justify-content: space-between; }
+    .sync-ok { color: #15803d; }
+    .sync-pending { color: #b91c1c; }
+    #sync-info { font-size: 0.8rem; color: #888; margin-bottom: 8px; display: flex; justify-content: space-between; }
+    .sync-badge {
+      display: inline-block;
+      font-size: 0.75rem;
+      font-weight: 600;
+      padding: 2px 8px;
+      border-radius: 999px;
+      margin-left: 8px;
+      vertical-align: middle;
+      background: #fee2e2;
+      color: #b91c1c;
+    }
+    .sync-badge.connected {
+      background: #dcfce7;
+      color: #15803d;
+    }
+  </style>
+  <script type="module" src="./index.js"></script>
+</head>
+<body>
+
+  <h1>
+    PowerSync Offline-First Notes
+    <span id="sync-badge" class="sync-badge">Connecting…</span>
+  </h1>
+  <p class="subtitle">
+    Reads and writes go to a local SQLite database.
+    PowerSync syncs changes with Supabase in the background.
+    Works offline — try disconnecting your network.
+  </p>
+
+  <div id="sync-info">
+    <span id="status"></span>
+    <span id="last-sync">Never synced</span>
+  </div>
+
+  <div class="add-row">
+    <input id="noteInput" type="text" placeholder="Write a note…" />
+    <button onclick="addNote()">Add</button>
+  </div>
+
+  <ul id="notesList"></ul>
+
+</body>
+</html>
