@@ -2,6 +2,20 @@
 
 > **Note:** Many issues in earlier releases (v1.0.0–v2.0.0) are deliberate simplifications to keep the implementation accessible for learning. They will be addressed progressively in later releases as complexity is layered in.
 
+## v3.3.0
+
+### Old release URLs contain previous repository name
+
+Release tags v1.0.0–v3.2.1 were created under the `offline-first` repository name. URLs in those tagged versions (README, docs) still reference `virtualian/offline-first`. GitHub redirects these automatically, but the redirect breaks if a new repository named `offline-first` is ever created under the same account.
+
+**Workaround:** None required — GitHub redirects work transparently. Avoid creating a new repo named `offline-first` under the `virtualian` account.
+
+### Existing clones require remote URL update
+
+Anyone who cloned the repository before the rename still has the old remote URL configured.
+
+**Fix:** Run `git remote set-url origin git@github.com:virtualian/learn-offline-first-apps.git`
+
 ## v3.2.1
 
 No new issues introduced. Documentation site responsive layout issue from v3.2.0 is resolved.

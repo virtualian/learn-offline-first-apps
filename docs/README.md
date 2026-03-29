@@ -4,9 +4,9 @@
 
 This project starts from the simplest possible online-first baseline and progressively adds offline capabilities, one step at a time. Each step has a working demo and documentation explaining the concepts behind it.
 
-Each [release](https://github.com/virtualian/offline-first/releases) marks a working milestone — from online-first ([v1.0.0](https://github.com/virtualian/offline-first/releases/tag/v1.0.0)) through realtime sync ([v2.0.0](https://github.com/virtualian/offline-first/releases/tag/v2.0.0)) to offline-first ([v3.0.0](https://github.com/virtualian/offline-first/releases/tag/v3.0.0)). Check out any tag to see the project at that stage. See the [release notes](https://github.com/virtualian/offline-first/blob/main/RELEASE_NOTES.md) and [known issues](https://github.com/virtualian/offline-first/blob/main/KNOWN_ISSUES.md).
+Each [release](https://github.com/virtualian/learn-offline-first-apps/releases) marks a working milestone — from online-first ([v1.0.0](https://github.com/virtualian/learn-offline-first-apps/releases/tag/v1.0.0)) through realtime sync ([v2.0.0](https://github.com/virtualian/learn-offline-first-apps/releases/tag/v2.0.0)) to offline-first ([v3.0.0](https://github.com/virtualian/learn-offline-first-apps/releases/tag/v3.0.0)). Check out any tag to see the project at that stage. See the [release notes](https://github.com/virtualian/learn-offline-first-apps/blob/main/RELEASE_NOTES.md) and [known issues](https://github.com/virtualian/learn-offline-first-apps/blob/main/KNOWN_ISSUES.md).
 
-**Questions or feedback?** Join the [discussions](https://github.com/virtualian/offline-first/discussions).
+**Questions or feedback?** Join the [discussions](https://github.com/virtualian/learn-offline-first-apps/discussions).
 
 ## What you'll learn
 

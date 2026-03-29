@@ -1,5 +1,13 @@
 # Release Notes
 
+## v3.3.0 — Repository Rename
+
+Released: 2026-03-29
+
+- Renamed repository from `offline-first` to `learn-offline-first-apps`
+- Updated all internal GitHub URLs, clone commands, and Docsify config
+- Old URLs redirect automatically via GitHub
+
 ## v3.2.1 — Responsive Docs Site
 
 Released: 2026-03-29

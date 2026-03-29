@@ -4,7 +4,7 @@
 
 Built in small steps, starting from the simplest possible online-first baseline and progressively adding offline capabilities.
 
-**Questions or feedback?** Join the [discussions](https://github.com/virtualian/offline-first/discussions).
+**Questions or feedback?** Join the [discussions](https://github.com/virtualian/learn-offline-first-apps/discussions).
 
 ## What's Here
 
@@ -22,8 +22,8 @@ Built in small steps, starting from the simplest possible online-first baseline 
 ### 1. Clone the repo
 
 ```bash
-git clone https://github.com/virtualian/offline-first.git
-cd offline-first
+git clone https://github.com/virtualian/learn-offline-first-apps.git
+cd learn-offline-first-apps
 ```
 
 ### 2. Run the docs
@@ -131,17 +131,18 @@ Each release marks a working milestone in the progression from online-first to o
 
 | Release | What it adds |
 |---|---|
-| [v1.0.0](https://github.com/virtualian/offline-first/releases/tag/v1.0.0) | Initial online-first example app — direct reads and writes to Supabase |
-| [v2.0.0](https://github.com/virtualian/offline-first/releases/tag/v2.0.0) | Online sync with Supabase Realtime — multi-client WebSocket sync |
-| [v3.0.0](https://github.com/virtualian/offline-first/releases/tag/v3.0.0) | Offline-first with PowerSync — local SQLite with bidirectional sync |
-| [v3.1.0](https://github.com/virtualian/offline-first/releases/tag/v3.1.0) | Diataxis documentation site |
-| [v3.2.0](https://github.com/virtualian/offline-first/releases/tag/v3.2.0) | Improved docs site with header, collapsible sidebar, and release docs |
-| [v3.2.1](https://github.com/virtualian/offline-first/releases/tag/v3.2.1) | Responsive docs site — mobile and tablet layout fix |
+| [v1.0.0](https://github.com/virtualian/learn-offline-first-apps/releases/tag/v1.0.0) | Initial online-first example app — direct reads and writes to Supabase |
+| [v2.0.0](https://github.com/virtualian/learn-offline-first-apps/releases/tag/v2.0.0) | Online sync with Supabase Realtime — multi-client WebSocket sync |
+| [v3.0.0](https://github.com/virtualian/learn-offline-first-apps/releases/tag/v3.0.0) | Offline-first with PowerSync — local SQLite with bidirectional sync |
+| [v3.1.0](https://github.com/virtualian/learn-offline-first-apps/releases/tag/v3.1.0) | Diataxis documentation site |
+| [v3.2.0](https://github.com/virtualian/learn-offline-first-apps/releases/tag/v3.2.0) | Improved docs site with header, collapsible sidebar, and release docs |
+| [v3.2.1](https://github.com/virtualian/learn-offline-first-apps/releases/tag/v3.2.1) | Responsive docs site — mobile and tablet layout fix |
+| [v3.3.0](https://github.com/virtualian/learn-offline-first-apps/releases/tag/v3.3.0) | Repository renamed to `learn-offline-first-apps` |
 
-See all [releases](https://github.com/virtualian/offline-first/releases) | [release notes](RELEASE_NOTES.md) | [known issues](KNOWN_ISSUES.md).
+See all [releases](https://github.com/virtualian/learn-offline-first-apps/releases) | [release notes](RELEASE_NOTES.md) | [known issues](KNOWN_ISSUES.md).
 
 ---
 
 ## Discussions
 
-Questions, ideas, or feedback? Join the [discussions](https://github.com/virtualian/offline-first/discussions).
+Questions, ideas, or feedback? Join the [discussions](https://github.com/virtualian/learn-offline-first-apps/discussions).

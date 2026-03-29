@@ -2,12 +2,12 @@
 
 ## Fork and Clone
 
-1. Fork the repository at [github.com/virtualian/offline-first](https://github.com/virtualian/offline-first).
+1. Fork the repository at [github.com/virtualian/learn-offline-first-apps](https://github.com/virtualian/learn-offline-first-apps).
 2. Clone your fork locally:
 
 ```bash
-git clone https://github.com/<your-username>/offline-first.git
-cd offline-first
+git clone https://github.com/<your-username>/learn-offline-first-apps.git
+cd learn-offline-first-apps
 ```
 
 ## Branch Naming
@@ -98,7 +98,7 @@ Keep PRs focused -- one concern per PR. If your change spans multiple topics, sp
 
 ## What to Work On
 
-Check [GitHub Issues](https://github.com/virtualian/offline-first/issues) for open items. Issues are labeled by type:
+Check [GitHub Issues](https://github.com/virtualian/learn-offline-first-apps/issues) for open items. Issues are labeled by type:
 
 | Label | Meaning |
 |:------|:--------|
