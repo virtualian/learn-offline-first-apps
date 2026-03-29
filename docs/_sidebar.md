@@ -1,11 +1,31 @@
-- **Learner**
-  - Explanation
-    - [01 · Online-First with Supabase](learner/explanation/01-online-first-supabase.md)
-    - [02 · Monitoring Supabase](learner/explanation/02-monitoring-supabase.md)
-    - [03 · Realtime Sync with Supabase](learner/explanation/03-realtime-sync-supabase.md)
-    - [04 · Offline-First with PowerSync](learner/explanation/04-offline-first-powersync.md)
-    - [05 · Monitoring PowerSync](learner/explanation/05-monitoring-powersync.md)
+- **Developer**
+  - Tutorials
+    - [Build a Notes App with Supabase](developers/tutorials/online-first.md)
+    - [Add Realtime Sync](developers/tutorials/online-with-sync.md)
+    - [Make It Work Offline](developers/tutorials/offline-first.md)
   - How-To
-    - [01 · Set Up and Test the PowerSync Demo](learner/how-to/01-setup-powersync-demo.md)
-    - [02 · Set Up and Test the Online-First Demo](learner/how-to/02-setup-online-first-demo.md)
-    - [03 · Set Up and Test the Online Sync Demo](learner/how-to/03-setup-online-sync-demo.md)
+    - [Set Up the Online-First Demo](developers/how-to/setup-online-first.md)
+    - [Set Up the Online Sync Demo](developers/how-to/setup-online-sync.md)
+    - [Set Up the PowerSync Demo](developers/how-to/setup-offline-first.md)
+  - Reference
+    - [Architecture](developers/reference/architecture.md)
+    - [Supabase Configuration](developers/reference/supabase-config.md)
+    - [PowerSync Configuration](developers/reference/powersync-config.md)
+  - Explanation
+    - [Why Online-First Works](developers/explanation/online-first.md)
+    - [How Realtime Sync Works](developers/explanation/realtime-sync.md)
+    - [How Offline-First Works](developers/explanation/offline-first.md)
+
+- **Maintainer**
+  - How-To
+    - [Run All Demos](maintainers/how-to/run-demos.md)
+  - Reference
+    - [Infrastructure](maintainers/reference/infrastructure.md)
+  - Explanation
+    - [Architecture Decisions](maintainers/explanation/architecture-decisions.md)
+
+- **Contributor**
+  - How-To
+    - [How to Contribute](contributors/how-to/contributing.md)
+  - Reference
+    - [Project Structure](contributors/reference/project-structure.md)
