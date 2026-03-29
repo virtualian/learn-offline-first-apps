@@ -30,23 +30,138 @@
     body {
       font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     }
-    .sidebar .app-name {
-      font-size: 1.1rem;
-      font-weight: 700;
-      letter-spacing: -0.02em;
+
+    /* ── Site header ────────────────────────────── */
+    .site-header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      background: #fff;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+      display: flex;
+      align-items: center;
+      height: 58px;
+      padding: 0 1.5em;
     }
-    .sidebar-nav > ul > li > a {
+    .site-header .home-btn {
+      display: flex;
+      align-items: center;
+      text-decoration: none;
+      color: var(--theme-color);
+      flex-shrink: 0;
+      margin-right: 0.6em;
+      transition: opacity 0.15s;
+    }
+    .site-header .home-btn:hover {
+      opacity: 0.7;
+    }
+    .site-header .home-btn svg {
+      width: 20px;
+      height: 20px;
+    }
+    .site-header .site-brand {
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: #222;
+      letter-spacing: -0.02em;
+      white-space: nowrap;
+      text-decoration: none;
+    }
+    .site-header .site-brand:hover {
+      color: var(--theme-color);
+    }
+    .site-header .site-subtitle {
+      font-size: 0.88rem;
+      color: #555;
+      margin-left: 0.8em;
+      padding-left: 0.8em;
+      border-left: 1px solid #ddd;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      min-width: 0;
+    }
+    .site-header .role-tabs {
+      position: static;
+      display: flex;
+      gap: 0;
+      margin-left: auto;
+      height: 100%;
+      align-items: stretch;
+      flex-shrink: 0;
+    }
+    .site-header .role-tab {
+      display: flex;
+      align-items: center;
+      padding: 0 1em;
+      text-decoration: none;
+      font-size: 0.82rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: #888;
+      border-bottom: 2px solid transparent;
+      transition: color 0.15s, border-color 0.15s;
+    }
+    .site-header .role-tab:hover {
+      color: #444;
+    }
+    .site-header .role-tab.active {
+      color: var(--theme-color);
+      border-bottom-color: var(--theme-color);
+    }
+
+    /* Push everything below the header */
+    body {
+      padding-top: 58px;
+    }
+    .sidebar {
+      padding-top: 58px !important;
+    }
+
+    /* Hide Docsify's built-in app-name since we have the header */
+    .sidebar .app-name {
+      display: none;
+    }
+
+    /* ── Sidebar nav styling ───────────────────── */
+    /* Top-level links: roles (Developer, Maintainer, Contributor) + Home */
+    .sidebar-nav > ul > li.folder > a {
       font-weight: 600;
       text-transform: uppercase;
       font-size: 0.75rem;
       letter-spacing: 0.05em;
-      color: #999;
-      pointer-events: none;
+      color: #666;
+      cursor: pointer;
     }
+    .sidebar-nav > ul > li.folder > a:hover {
+      color: var(--theme-color);
+    }
+    /* Section-level links (Tutorials, How-To, etc.) */
     .sidebar-nav > ul > li > ul > li > a {
-      font-weight: 500;
+      font-weight: 600;
+      font-size: 0.82rem;
+      color: #555;
+    }
+    .sidebar-nav > ul > li > ul > li > a:hover {
+      color: var(--theme-color);
+    }
+    /* Leaf-level links (individual pages) */
+    .sidebar-nav > ul > li > ul > li > ul > li > a {
+      font-weight: 400;
       font-size: 0.85rem;
     }
+    /* Visual separation between role groups */
+    .sidebar-nav > ul > li.folder {
+      margin-top: 0.8em;
+    }
+    .sidebar-nav > ul > li.folder:first-of-type {
+      margin-top: 0;
+    }
+
+    /* ── Content styling ───────────────────────── */
     .markdown-section h1 + blockquote {
       border-left: 3px solid var(--theme-color);
       background: #f0fdf4;
@@ -68,6 +183,22 @@
   </style>
 </head>
 <body>
+  <!-- Site header with title, home button, and role tabs -->
+  <header class="site-header">
+    <a href="#/" class="home-btn" title="Home">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+        <polyline points="9 22 9 12 15 12 15 22"/>
+      </svg>
+    </a>
+    <a href="#/" class="site-brand">Learn Offline-First Data Management and Synchronisation</a>
+    <nav class="role-tabs">
+      <a href="#/developers/" class="role-tab" data-role="developers">Developer</a>
+      <a href="#/maintainers/" class="role-tab" data-role="maintainers">Maintainer</a>
+      <a href="#/contributors/" class="role-tab" data-role="contributors">Contributor</a>
+    </nav>
+  </header>
+
   <div id="app"></div>
 
   <script>
@@ -76,7 +207,8 @@
       repo: 'https://github.com/virtualian/offline-first',
       loadSidebar: true,
       subMaxLevel: 2,
-      homepage: 'developers/explanation/online-first.md',
+      sidebarDisplayLevel: 1,
+      homepage: 'README.md',
       search: {
         placeholder: 'Search docs...',
         noData: 'No results.',
@@ -106,17 +238,28 @@
   <!-- Copy code -->
   <script src="https://cdn.jsdelivr.net/npm/docsify-copy-code@2/dist/docsify-copy-code.min.js"></script>
 
+  <!-- Sidebar collapse -->
+  <script src="https://cdn.jsdelivr.net/npm/docsify-sidebar-collapse/dist/docsify-sidebar-collapse.min.js"></script>
+
   <!-- Mermaid -->
   <script src="https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js"></script>
   <script>
     mermaid.initialize({ startOnLoad: false, theme: 'default' })
 
     // Re-render Mermaid diagrams after each page load
-    window.$docsify.plugins = [function (hook) {
+    // Highlight active role tab based on current URL
+    ;(window.$docsify.plugins = window.$docsify.plugins || []).push(function (hook) {
       hook.doneEach(function () {
         mermaid.run({ querySelector: '.mermaid' })
+
+        // Update role tab active state
+        var hash = location.hash || '#/'
+        document.querySelectorAll('.site-header .role-tab').forEach(function (tab) {
+          var role = tab.getAttribute('data-role')
+          tab.classList.toggle('active', hash.indexOf('#/' + role + '/') === 0)
+        })
       })
-    }]
+    })
   </script>
 
   <!-- Syntax highlighting -->

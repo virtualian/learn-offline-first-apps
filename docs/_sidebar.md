@@ -1,31 +1,30 @@
-- **Developer**
-  - Tutorials
+- [Home](/)
+- [Developer](developers/)
+  - [Tutorials](developers/tutorials/)
     - [Build a Notes App with Supabase](developers/tutorials/online-first.md)
     - [Add Realtime Sync](developers/tutorials/online-with-sync.md)
     - [Make It Work Offline](developers/tutorials/offline-first.md)
-  - How-To
+  - [How-To](developers/how-to/)
     - [Set Up the Online-First Demo](developers/how-to/setup-online-first.md)
     - [Set Up the Online Sync Demo](developers/how-to/setup-online-sync.md)
     - [Set Up the PowerSync Demo](developers/how-to/setup-offline-first.md)
-  - Reference
+  - [Reference](developers/reference/)
     - [Architecture](developers/reference/architecture.md)
     - [Supabase Configuration](developers/reference/supabase-config.md)
     - [PowerSync Configuration](developers/reference/powersync-config.md)
-  - Explanation
+  - [Explanation](developers/explanation/)
     - [Why Online-First Works](developers/explanation/online-first.md)
     - [How Realtime Sync Works](developers/explanation/realtime-sync.md)
     - [How Offline-First Works](developers/explanation/offline-first.md)
-
-- **Maintainer**
-  - How-To
+- [Maintainer](maintainers/)
+  - [How-To](maintainers/how-to/)
     - [Run All Demos](maintainers/how-to/run-demos.md)
-  - Reference
+  - [Reference](maintainers/reference/)
     - [Infrastructure](maintainers/reference/infrastructure.md)
-  - Explanation
+  - [Explanation](maintainers/explanation/)
     - [Architecture Decisions](maintainers/explanation/architecture-decisions.md)
-
-- **Contributor**
-  - How-To
+- [Contributor](contributors/)
+  - [How-To](contributors/how-to/)
     - [How to Contribute](contributors/how-to/contributing.md)
-  - Reference
+  - [Reference](contributors/reference/)
     - [Project Structure](contributors/reference/project-structure.md)

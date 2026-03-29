@@ -28,6 +28,26 @@ triggers:
 3. **Keep content types distinct** because mixed purposes confuse readers
 4. **Update docs when code changes** because outdated docs mislead users
 5. **No AI attribution** because content stands on merit, not origin
+6. **Keep release documentation current** because stale release notes and known issues erode trust
+
+---
+
+## Release Documentation
+
+The following files MUST be kept current at all times, and MUST be updated before creating any new release:
+
+| File | Purpose | Update trigger |
+|---|---|---|
+| `README.md` | Project overview and getting started | Any change to project structure, setup steps, or features |
+| `docs/README.md` | Docs site landing page | Any change to documentation structure or content |
+| `RELEASE_NOTES.md` | Cumulative changelog by version | Before every release — add the new version section |
+| `KNOWN_ISSUES.md` | Active issues and limitations | When issues are discovered, resolved, or planned for a release |
+
+**Before creating a release:**
+- [ ] `RELEASE_NOTES.md` has a section for the new version with all changes
+- [ ] `KNOWN_ISSUES.md` reflects current state — new issues added, resolved issues noted
+- [ ] `README.md` releases table includes the new version
+- [ ] `docs/README.md` release references are current
 
 ---
 
@@ -100,3 +120,4 @@ Diagrams MUST stay consistent with the surrounding documentation. Update diagram
 - **Mixing content types** — How-to guides with theory, reference that teaches, explanations with procedures
 - **Leaving stale docs** — Update or remove, never ignore
 - **Creating redundant docs** — One authoritative source per topic
+- **Releasing without updating release docs** — RELEASE_NOTES.md, KNOWN_ISSUES.md, and READMEs must be current before any release
