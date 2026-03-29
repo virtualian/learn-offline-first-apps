@@ -285,7 +285,11 @@ The demo is now fully functional offline-first:
 - Notes are stored locally in SQLite (instant reads and writes)
 - Changes sync bidirectionally with Supabase via PowerSync Cloud
 - The UI updates reactively when sync delivers new data
-- A badge shows the current sync status
+- Delete notes with the × button — deletes sync to Supabase via the same connector
+- A badge shows "Online hh:mm:ss" (green) or "Offline hh:mm:ss" (red) with a live-ticking duration
+- A global "Last sync'd +hh:mm:ss" / "Not sync'd -hh:mm:ss" indicator shows table-level sync status
+- Each unsynced note shows "Not sync'd -hh:mm:ss" (red) — queried from PowerSync's internal `ps_crud` upload queue
+- Timestamps display as `YYYY-MM-DD hh:mm:ss.ss` and are stored as ISO 8601
 - Everything works offline — sync resumes when connectivity returns
 
 ## Architecture comparison
