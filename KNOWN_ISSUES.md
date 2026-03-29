@@ -2,7 +2,7 @@
 
 > **Note:** Many issues in earlier releases (v1.0.0–v2.0.0) are deliberate simplifications to keep the implementation accessible for learning. They will be addressed progressively in later releases as complexity is layered in.
 
-## v3.2.0 (upcoming)
+## v3.2.0
 
 ### Documentation site not responsive to device display sizes
 

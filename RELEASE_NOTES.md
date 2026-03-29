@@ -1,19 +1,16 @@
 # Release Notes
 
-## v3.2.0 (upcoming)
+## v3.2.0 — Improved Docs Site and Release Documentation
 
-### Improved documentation site and simplified demo
+Released: 2026-03-29
 
 - Documentation site header with title, home button, and role-based navigation tabs
 - Collapsible sidebar sections with intro pages for each role and content type
 - Landing page rewritten as a getting-started guide
 - README restructured: clone and docs are now the first steps
-- Known issues documented and tracked
-
-**Planned:**
-- Simplify the PowerSync demo to focus on core offline-first sync
-- Remove deletion and status indicators to reduce implementation complexity
-- Progressively re-add features in subsequent releases
+- Added KNOWN_ISSUES.md and RELEASE_NOTES.md
+- Added releases and discussions references to READMEs
+- Fixed docsify-sidebar-collapse plugin registration and docsify-themeable nav positioning
 
 ## v3.1.0 — Diataxis Documentation Site
 
