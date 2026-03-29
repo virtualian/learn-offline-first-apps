@@ -135,6 +135,7 @@ Each release marks a working milestone in the progression from online-first to o
 | [v2.0.0](https://github.com/virtualian/offline-first/releases/tag/v2.0.0) | Online sync with Supabase Realtime — multi-client WebSocket sync |
 | [v3.0.0](https://github.com/virtualian/offline-first/releases/tag/v3.0.0) | Offline-first with PowerSync — local SQLite with bidirectional sync |
 | [v3.1.0](https://github.com/virtualian/offline-first/releases/tag/v3.1.0) | Diataxis documentation site |
+| [v3.2.0](https://github.com/virtualian/offline-first/releases/tag/v3.2.0) | Improved docs site with header, collapsible sidebar, and release docs |
 
 See all [releases](https://github.com/virtualian/offline-first/releases) | [release notes](RELEASE_NOTES.md) | [known issues](KNOWN_ISSUES.md).
 
